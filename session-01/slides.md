@@ -1,5 +1,5 @@
 # Computer Science Study
-
+## SESSION 1
 A simple tool for learning programming ([github](https://github.com/fly2abhishek/cs-study)).
 
 
@@ -182,15 +182,15 @@ The Big O notation is useful when we only have upper bound on time complexity of
 
 #### Best Case, Worst Case, and Expected Case
 - Best Case: If all elements are equal, then quick sort will, on average, just traverse through the array once. 
-This is O(N).
+This is $O(N)$.
 - Worst Case: What if we get really unlucky and the pivot is repeatedly the biggest element in the array? 
 In this case, our recursion doesn't divide the array in half and recurse on each half. It just shrinks the subarray by one element. 
-This will degenerate to an O(N^2) runtime.
+This will degenerate to an $O(N^2)$ runtime.
 
 
 - Expected Case: Usually, though, these wonderful or terrible situations won't happen. 
 Sure, sometimes the pivot will be very low or very high, but it won't happen over and over again. 
-We can expect a runtime of O(N log N).
+We can expect a runtime of $O(N log N)$.
 
 
 # Space Complexity
@@ -198,11 +198,11 @@ We can expect a runtime of O(N log N).
 - Time is not the only thing that matters in an algorithm. We might also care about the amount of memory­ or space-required by an algorithm.
 - Space complexity is a parallel concept to time complexity. 
 - If we need to create an array of size n, this will require 0(n) space. 
-- If we need a two-dimensional array of size nxn, this will requireO(n2) space.
+- If we need a two-dimensional array of size nxn, this will require $O(n2)$ space.
 
 
 Stack space in recursive calls counts, too. 
-For example, code like this would takeO(n) time andO(n) space.
+For example, code like this would take $O(n)$ time and $O(n)$ space.
 ```c++
 int sum(int n) {
   if (n <= 0) {
@@ -223,7 +223,7 @@ Each call adds a level to the stack.
 Each of these calls is added to the call stack and takes up actual memory.
 
 
-However, just because you have n calls total doesn't mean it takes O(n) space. Consider the below function, which adds adjacent elements between O and n:
+However, just because you have n calls total doesn't mean it takes $O(n)$ space. Consider the below function, which adds adjacent elements between O and n:
 ```c++
 int pairSumSequence(int n) {
 	int sum = 0;
@@ -236,7 +236,7 @@ int pairSum(int a, int b) {
 	return a + b;
 }
 ```
-There will be roughly O(n) calls to pairSum. However, those calls do not exist simultaneously on the call stack, so you only need O(1) space.
+There will be roughly $O(n)$ calls to pairSum. However, those calls do not exist simultaneously on the call stack, so you only need $O(1)$ space.
 
 
 ### How to calculate Big O?
@@ -254,7 +254,7 @@ function printFirstItem(items) {
   console.log(items[0]);
 }
 ```
-This function runs in O(1) time (or "constant time") relative to its input. The input array could be 1 item or 1,000 items, but this function would still just require one "step."
+This function runs in $O(1$) time (or "constant time") relative to its input. The input array could be 1 item or 1,000 items, but this function would still just require one "step."
 
 ```
   function printAllItems(items) {
@@ -263,7 +263,7 @@ This function runs in O(1) time (or "constant time") relative to its input. The 
   });
 }
 ```
-This function runs in O(n) time (or "linear time"), where nn is the number of items in the array. If the array has 10 items, we have to print 10 times. If it has 1,000 items, we have to print 1,000 times.
+This function runs in $O(n)$ time (or "linear time"), where nn is the number of items in the array. If the array has 10 items, we have to print 10 times. If it has 1,000 items, we have to print 1,000 times.
 
 
 ```
@@ -279,7 +279,7 @@ Here we're nesting two loops. If our array has nn items, our outer loop runs nn 
 
 
 #### N could be the actual input, or the size of the input
-Both of these functions have O(n) runtime, even though one takes an integer as its input and the other takes an array:
+Both of these functions have $O(n)$ runtime, even though one takes an integer as its input and the other takes an array:
 
 ```
   function sayHiNTimes(n) {
@@ -311,7 +311,7 @@ This is why big O notation rules. When you're calculating the big O complexity o
   });
 }
 ```
-This is O(2n), which we just call O(n).
+This is $O(2n)$, which we just call $O(n)$.
 
 
 ```
@@ -331,7 +331,7 @@ This is O(2n), which we just call O(n).
   }
 }
 ```
-This is O(1 + n/2 + 100), which we just call O(n).
+This is $O(1 + n/2 + 100)$, which we just call $O(n)$.
 
 Why can we get away with this? Remember, for big O notation we're looking at what happens as nn gets arbitrarily large. As nn gets really big, adding 100 or dividing by 2 has a decreasingly significant effect.
 
@@ -353,14 +353,15 @@ Why can we get away with this? Remember, for big O notation we're looking at wha
   });
 }
 ```
-Here our runtime is `O(n + n^2)` which we just call O(n^2). Even if it was `O(n^2/2 + 100n)`, it would still be O(n^2).
+Here our runtime is $O(n + n^2)$ which we just call $O(n^2)$. Even if it was $O(n^2/2 + 100n)$, it would still be $O(n^2)$.
 
 
 Similarly:
-```
-O(n^3 + 50n^2 + 10000) is O(n^3)
-O((n + 30) * (n + 5)) is O(n^2)
-```
+
+$O(n^3 + 50n^2 + 10000)$ is $O(n^3)$
+
+$O((n + 30) * (n + 5))$ is $O(n^2)$
+
 Again, we can get away with this because the less significant terms quickly become, well, less significant as nn gets big.
 
 
@@ -382,13 +383,13 @@ Sometimes the worst case runtime is significantly worse than the best case runti
 ```
 Here we might have 100 items in our haystack, but the first item might be the needle, in which case we would return in just 1 iteration of our loop.
 
-In general we'd say this is O(n) runtime and the "worst case" part would be implied. But to be more specific we could say this is worst case O(n) and best case O(1) runtime. For some algorithms we can also make rigorous statements about the "average case" runtime.
+In general we'd say this is $O(n)$ runtime and the "worst case" part would be implied. But to be more specific we could say this is worst case $O(n)$ and best case $O(1)$ runtime. For some algorithms we can also make rigorous statements about the "average case" runtime.
 
 
 ### Log N Runtimes
-We commonly seeO(log N) in runtimes. Where does this come from?
+We commonly see $O(log N)$ in runtimes. Where does this come from?
 
-Lets condiser the example of Binary Search:
+Lets candider the example of Binary Search:
 
 ```javascript
 const binarySearch = function (arr, x, start, end) { 
@@ -439,7 +440,61 @@ what power must we raise 2 to, to get `$2^x$`?
  That's just x.
   `$$ \log_{2}n = x $$`
   
- 
+
+
 ## Recursive Runtimes
-  
+```c++
+int f(int n) {
+  if (n <= 1) {
+    return 1;
+  }
+  return f(n - 1) + f(n - 1);
+}
+```
+
+
+Suppose we call f(4). This calls f(3) twice. Each of those calls to f(3) calls f(2), until we get down to f(1)
+
+![](../img/recursive-runtime.png)
+
+
+| Level | Nodes | Expression                 | Runtime |
+|-------|-------|----------------------------|---------|
+| 0     | 1     |                            | $$2^0$$ |
+| 1     | 2     |$$2 * l-1 = 2$$             | $$2^1$$ |
+| 2     | 4     |$$2 * l-1 = 2 * 2^1 = 2^2$$ | $$2^2$$ |
+| 3     | 8     |$$2 * l-1 = 2 * 2^2 = 2^3$$ | $$2^3$$ |
+| 4     | 16    |$$2 * l-1 = 2 * 2^3 = 2^4$$ | $$2^4$$ |
+
+
+Therefore, there will be $$2^0+ 2^1 + 2^2 + 2^3 + 2^4 + .. + 2^n$$ 
+(which is $2^n+1 - 1$) nodes.
+
+When you have a recursive function that makes multiple calls, the runtime will often (but not always) look like 
+O(branches ^ depth), 
+
+Where branches is the number of times each recursive call branches. In this case, this gives us $$O(2^n)$$
+     
+
+
 ## Practice?
+
+
+What is the time, space complexity of following code :
+```javascript
+        int a = 0, b = 0;    
+        for (i = 0; i < N; i++) {
+            a = a + rand();  
+        }
+        for (j = 0; j < M; j++) {
+            b = b + rand();
+        }
+```
+Assume that `rand()` is $O(1)$ time, $O(1)$ space function.
+
+
+1. $O(N * M)$ time, $O(1)$ space
+2. $O(N + M)$ time, $O(N + M)$ space
+3. $O(N + M)$ time, $O(1)$ space
+4. $O(N * M)$ time, $O(N + M)$ space
+5. $O(N * M) time, O(N * M)$ space
