@@ -1,118 +1,338 @@
 # Computer Science Study
-## Session 2
+## SESSION 2
 A simple tool for learning programming ([github](https://github.com/fly2abhishek/cs-study)).
 
 
-# Data Structures
+
+## Asymptotic Analysis (cont...)
 
 
-## Arrays
+### Log N Runtimes
+We commonly see $O(log N)$ in runtimes. Where does this come from?
 
-Quick reference
-
-An array organizes items sequentially, one after another in memory.
-
-Each position in the array has an index, starting at 0.
-
-Arrays are the building blocks for lots of other, more complex data structures.
+Lets candider the example of Binary Search:
 
 
-| Worst Case |     |
-| -----------|-----|
-| space	     | O(n)|
-| lookup     | O(1)|
-| append     | O(1)|
-| insert     | O(n)|
-| delete     | O(n)|
+```javascript
+const binarySearch = function (arr, x, start, end) { 
+       
+    // Base Condtion 
+    if (start > end) return false; 
+   
+    // Find the middle index 
+    let mid=Math.floor((start + end)/2); 
+   
+    // Compare mid with given key x 
+    if (arr[mid]===x) return true; 
+          
+    // If element at mid is greater than x, 
+    // search in the left half of mid 
+    if(arr[mid] > x)  
+        return binarySearch(arr, x, start, mid-1); 
+    else
+  
+        // If element at mid is smaller than x, 
+        // search in the right half of mid 
+        return binarySearch(arr, x, mid+1, end); 
+} 
+// Driver code 
+let arr = [1, 3, 5, 7, 8, 9]; 
+let x = 5; 
+```
 
 
-### Strengths
-- **Fast lookups**. Retrieving the element at a given index takes O(1) time, regardless of the length of the array.
-- **Fast appends**. Adding a new element at the end of the array takes O(1) time.
+"how many times must we divide our original array size (n) in half until we get down to 1?"
 
-### Weaknesses
-- **Fixed size**. You need to specify how many elements you're going to store in your array ahead of time. (Unless you're using a fancy dynamic array.)
-- **Costly inserts and deletes**. You have to "scoot over" the other elements to fill in or close gaps, which takes worst-case O(n) time.
+`$$ n * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} ... = 1 $$`
 
-
-### Inserting
-If we want to insert something into an array, first we have to make space by "scooting over" everything starting at the index we're inserting into:
-
-![](https://www.interviewcake.com/images/svgs/arrays__insert_value.svg?bust=202)
+How many `$ \frac{1}{2} $`s are there?  We don't know yet, but we can call that number x:
+`$$ n * (\frac{1}{2})^x = 1 $$`
 
 
-An array of letters. From top to bottom, the values in the array are A, B, C, E, F, and G. The letter D is being inserted at the position of E, and the letters E, F, and G are each shown "scooting over" one index up to make room.
-In the worst case we're inserting into the 0th index in the array (prepending), so we have to "scoot over" everything in the array. That's O(n) time.
+Now we solve for x:
+ `$$ n * \frac{1^x}{2^x} = 1$$`
+ `$$ n * \frac{1}{2^x} = 1$$`
+ `$$ n / 2^x = 1 $$`
+ `$$ n = 2^x $$`
 
 
-### Deleting
-Array elements are stored adjacent to each other. So when we remove an element, we have to fill in the gap—"scooting over" all the elements that were after it:
-
-![](https://www.interviewcake.com/images/svgs/arrays__delete_value.svg?bust=202)
-
-
-Another array of letters. From top to bottom, the values in the array are A, B, C, Z, D, E, and F. The letter Z is being deleted, and the letters D, E, and F are each shown "scooting over" one index down to fill the space created by the deletion.
-In the worst case we're deleting the 0th item in the array, so we have to "scoot over" everything else in the array. That's O(n)O(n) time.
+Take the `$\log_{2}$` of both sides...
+    `$$ \log_{2}n = \log_{2}2^x $$`
+what power must we raise 2 to, to get `$2^x$`? 
+ That's just x.
+  `$$ \log_{2}n = x $$`
+  
 
 
-## Dynamic Arrays
-
-- A dynamic array is an array with a big improvement: automatic resizing.
-
-- One limitation of arrays is that they're fixed size, meaning you need to specify the number of elements your array will hold ahead of time.
-
-- A dynamic array expands as you add more elements. So you don't need to determine the size ahead of time.
-
-
-|        | Average Case | Worst Case |
-|--------|--------------|------------|
-|space   | O(n)         | O(n)       |
-|lookup  | O(1)         | O(1)       |
-|append  | O(1)         | O(n)       |
-|insert  | O(n)         | O(n)       |
-|delete  | O(n)         | O(n)       |
+## Recursive Runtimes
+```c++
+int f(int n) {
+  if (n <= 1) {
+    return 1;
+  }
+  return f(n - 1) + f(n - 1);
+}
+```
 
 
-### Strengths:
-- **Fast lookups**. Just like arrays, retrieving the element at a given index takes O(1) time.
-- **Variable size**. You can add as many items as you want, and the dynamic array will expand to hold them.
-- **Cache-friendly**. Just like arrays, dynamic arrays place items right next to each other in memory, making efficient use of caches.
+Suppose we call f(4). This calls f(3) twice. Each of those calls to f(3) calls f(2), until we get down to f(1)
+
+![](../img/recursive-runtime.png)
 
 
-### Weaknesses:
-- **Slow worst-case appends**. Usually, adding a new element at the end of the dynamic array takes O(1) time. But if the dynamic array doesn't have any room for the new item, it'll need to expand, which takes O(n) time.
-- **Costly inserts and deletes**. Just like arrays, elements are stored adjacent to each other. So adding or removing an item in the middle of the array requires "scooting over" other elements, which takes O(n) time.
+| Level | Nodes | Expression                 | Runtime |
+|-------|-------|----------------------------|---------|
+| 0     | 1     |                            | $$2^0$$ |
+| 1     | 2     |$$2 * l-1 = 2$$             | $$2^1$$ |
+| 2     | 4     |$$2 * l-1 = 2 * 2^1 = 2^2$$ | $$2^2$$ |
+| 3     | 8     |$$2 * l-1 = 2 * 2^2 = 2^3$$ | $$2^3$$ |
+| 4     | 16    |$$2 * l-1 = 2 * 2^3 = 2^4$$ | $$2^4$$ |
 
 
-### Size vs. Capacity
+Therefore, there will be $$2^0+ 2^1 + 2^2 + 2^3 + 2^4 + .. + 2^n$$ 
+(which is $2^n+1 - 1$) nodes.
 
-When you allocate a dynamic array, your dynamic array implementation makes an underlying fixed-size array. The starting size depends on the implementation—let's say our implementation uses 10 indices. Now say we append 4 items to our dynamic array. At this point, our dynamic array has a length of 4. But the underlying array has a length of 10.
+When you have a recursive function that makes multiple calls, the runtime will often (but not always) look like 
+O(branches ^ depth), 
 
-We'd say this dynamic array's size is 4 and its capacity is 10. The dynamic array stores an end_index to keep track of where the dynamic array ends and the extra capacity begins.
-
-
-![](https://www.interviewcake.com/images/svgs/dynamic_arrays__capacity_size_end_index.svg?bust=202)
-
-
-### Doubling Appends
-What if we try to append an item but our array's capacity is already full?
-
-To make room, dynamic arrays automatically make a new, bigger underlying array. Usually twice as big.
-
-> Why not just extend the existing array? Because that memory might already be taken by another program.
-
-Each item has to be individually copied into the new array.
+Where branches is the number of times each recursive call branches. In this case, this gives us $$O(2^n)$$
+     
 
 
-### Amortized cost of appending
-
-1. The time cost of each special O(n) "doubling append" doubles each time.
-2. At the same time, the number of O(1) appends you get until the next doubling append also doubles.
-
-These two things sort of "cancel out," and we can say each append has an average cost or **amortized cost** of O(1).
-
-Given this, in industry we usually wave our hands and say dynamic arrays have a time cost of O(1) for appends, even though strictly speaking that's only true for the average case or the amortized cost.
+## Practice?
 
 
-# Thank YOU
-# Questions?
+What is the time, space complexity of following code :
+```javascript
+        int a = 0, b = 0;    
+        for (i = 0; i < N; i++) {
+            a = a + rand();  
+        }
+        for (j = 0; j < M; j++) {
+            b = b + rand();
+        }
+```
+Assume that `rand()` is $O(1)$ time, $O(1)$ space function.
+
+
+1. $O(N * M)$ time, $O(1)$ space
+2. $O(N + M)$ time, $O(N + M)$ space
+3. $O(N + M)$ time, $O(1)$ space
+4. $O(N * M)$ time, $O(N + M)$ space
+5. $O(N * M) time, O(N * M)$ space
+
+
+What is the time, space complexity of following code :
+```c
+    int a = 0, b = 0;    
+    for (i = 0; i < N; i++) {
+        for (j = 0; j < N; j++) {
+            a = a + j;
+        }
+    }
+    for (k = 0; k < N; k++) {
+        b = b + k;
+    } 
+```
+
+
+1. $O(N * N)$ time, $O(1)$ space
+2. $O(N)$ time, $O(N)$ space
+3. $O(N)$ time, $O(N)$ space
+4. $O(N * N)$ time, $O(N)$ space
+5. $O(N * N * N)$ time, $O(1)$ space
+
+
+What is the time complexity of the following code :
+```c
+    int a = 0;
+    for (i = 0; i < N; i++) {
+        for (j = N; j > i; j--) {
+            a = a + i + j;
+        }
+    }
+```
+
+
+1. $O(N)$
+2. $O(N*log(N))$
+3. $O(N * Sqrt(N))$
+4. $O(N*N)$
+
+
+Total number of runs = $N + (N - 1) + (N - 2) + … 1 + 0$
+
+$$= N * (N + 1) / 2$$
+
+$$= 1/2 * N^2 + 1/2 * N$$
+
+$O(N^2)$ times.
+
+
+What is the time complexity of the following code :
+```c
+ int a = 0, i = N;
+    while (i > 0) {
+      a += i;
+        i /= 2;
+     }
+```
+
+
+1. $O(N)$
+2. $O(Sqrt(N))$
+3. $O(N / 2)$
+4. $O(log N)$
+5. $O(log(log N))$
+
+
+We have to find the smallest x such that $N / 2^x < 1$ OR $2^x > N$
+
+$$x = log(N)$$
+
+
+What is time complexity of following code :
+```c
+        int count = 0;
+        for (int i = N; i > 0; i /= 2) {
+            for (int j = 0; j < i; j++) {
+                count += 1;
+            }
+        }
+```
+
+
+1. $O(N * N)$
+2. $O(N * log N)$
+3. $O(N * log(log(N)))$
+4. $O(N)$
+5. $O(N * Sqrt(N))$
+
+
+In the first iteration, the j loop runs N times.
+
+In the second iteration, the j loop runs $N / 2$ times.
+
+In the ith iteration, the j loop runs $N / 2^i$ times.
+
+So, the total number of runs of loop $= N + N / 2 + N / 4 + … 1$
+
+=$$ N * ( 1 + 1/2 + 1/4 + 1/8 + … ) < 2 * N$$
+
+
+What is the time complexity of the following code :
+```c
+    int i, j, k = 0;
+    for (i  = n/2; i <= n; i++) {
+        for (j = 2; j <= n; j = j * 2) {
+            k = k + n/2;
+        }
+    }
+```
+
+
+1. $Θ(n)$
+2. $Θ(nLogn)$
+3. $Θ(n^2)$
+4. $Θ(n^2 / Logn)$
+5. $Θ(n^2Logn)$
+
+
+Lets just assume n = 8 for now. 
+We will try to see, the values of j corresponding to each i.
+```
+i = 4, j = 2, 4, 8
+i = 5, j = 2, 4, 8
+i = 6, j = 2, 4, 8
+i = 7, j = 2, 4, 8
+i = 8, j = 2, 4, 8
+```
+
+If you notice, j keeps doubling till it is less than or equal to n. Number of times, you can double a number till it is less than n would be log(n).
+
+Lets take more examples here to convince ourselves.
+```
+ n = 16, j = 2, 4, 8, 16
+ n = 32, j = 2, 4, 8, 16, 32
+
+```
+
+So, j would run for $O(log n)$ steps. 
+i runs for $n/2 $steps.
+
+So, total steps $= O (n/ 2 * log (n)) = O(n logn)$
+
+
+In the following C++ function, let n >= m.
+```c
+    int gcd(int n, int m) {
+            if (n%m ==0) return m;
+            if (n < m) swap(n, m);
+            while (m > 0) {
+                n = n%m;
+                swap(n, m);
+            }
+            return n;
+    }
+```    
+
+
+1. $Θ(log n)$
+2. $Ω(n)$
+3. $Θ(log log n)$
+4. $Θ(sqrt(n))$
+
+
+Let us say n = fibonacci(N) and m = fibonacci(N - 1)
+
+fibonacci(N) = fibonacci(N-1) + fibonacci(N-2)
+
+OR n = m + k where k < m.
+
+Therefore the step
+```
+n = n % m will make n = k
+
+swap(n, m) will result in
+
+n = fibonacci(N-1)
+    
+m = k = fibonacci(N-2)
+```
+
+So, it will take N steps before m becomes 0.
+
+This means, in the worst case, this algorithm can take N step if n is Nth fibonacci number.
+
+
+```javascript
+/* 
+ * arr is sorted 
+ * arr.length() = N
+ * The function is initially called as searchNumOccurrence(arr, x, 0, N-1)
+ */
+const searchNumOccurrence = function (arr, x, start, end) {
+  
+  if (start > end) return false;
+  
+  let mid = Math.floor(start + end) / 2;
+  
+  if (arr[mid] < x) return searchNumOccurrence(arr, x, mid + 1, end);
+  
+  if (arr[mid] > x) return searchNumOccurrence(arr, x, start, mid - 1);
+  
+  return searchNumOccurrence(arr, x, start, mid - 1) + 1 + searchNumOccurrence(arr, x, mid + 1, end);
+  
+}
+```
+
+
+```
+T(N) = 2 * T(N/2) + constant
+     = 4 * T(N/4) + constant     ( 2 * constant = another constant ) 
+     = 8 * T(N/8) + constant 
+     ...
+     = N * T(N/N) + constant 
+     = N + constant 
+     = O(N)
+```
