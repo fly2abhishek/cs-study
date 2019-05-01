@@ -2,26 +2,25 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <title>CS Study</title>
 
-    <link rel="stylesheet" href="../reveal.js/css/reset.css">
-    <link rel="stylesheet" href="../reveal.js/css/reveal.css">
-    <link rel="stylesheet" href="../reveal.js/css/theme/white.css">
-    <link rel="stylesheet" href="../css/custom.css">
+    <link rel="stylesheet" href="/reveal.js/css/reset.css">
+    <link rel="stylesheet" href="/reveal.js/css/reveal.css">
+    <link rel="stylesheet" href="/reveal.js/css/theme/white.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
 
 
     <!-- Theme used for syntax highlighting of code -->
-    <link rel="stylesheet" href="../css/idea.css">
+    <link rel="stylesheet" href="/stylesheets/idea.css">
 
     <!-- Printing and PDF exports -->
     <script>
       var link = document.createElement('link');
       link.rel = 'stylesheet';
       link.type = 'text/css';
-      link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      link.href = window.location.search.match(/print-pdf/gi) ? '/reveal.js/css/print/pdf.css' : '/reveal.js/css/print/paper.css';
       document.getElementsByTagName('head')[0].appendChild(link);
     </script>
 </head>
@@ -29,12 +28,12 @@
 <div class="reveal">
     <div class="slides">
         <!-- Use external markdown resource, separate slides by three newlines; vertical slides by two newlines -->
-        <section data-markdown="slides.md" data-separator="^\n\n\n"
+        <section data-markdown="/slides/session-<%= id %>.md" data-separator="^\n\n\n"
                  data-separator-vertical="^\n\n"></section>
     </div>
 </div>
 
-<script src="../reveal.js/js/reveal.js"></script>
+<script src="/reveal.js/js/reveal.js"></script>
 
 <script>
   // More info about config & dependencies:
@@ -65,11 +64,11 @@
     },
 
     dependencies: [
-      {src: '../reveal.js/plugin/markdown/marked.js'},
-      {src: '../reveal.js/plugin/markdown/markdown.js'},
-      {src: '../reveal.js/plugin/notes/notes.js', async: true},
-      {src: '../reveal.js/plugin/highlight/highlight.js', async: true},
-      {src: '../reveal.js/plugin/math/math.js', async: true}
+      {src: '/reveal.js/plugin/markdown/marked.js'},
+      {src: '/reveal.js/plugin/markdown/markdown.js'},
+      {src: '/reveal.js/plugin/notes/notes.js', async: true},
+      {src: '/reveal.js/plugin/highlight/highlight.js', async: true},
+      {src: '/reveal.js/plugin/math/math.js', async: true}
     ]
   });
 </script>
