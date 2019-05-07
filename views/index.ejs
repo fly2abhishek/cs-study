@@ -1,11 +1,30 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<%- include('header'); -%>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h1>Welcome to <%= title %></h1>
+            <table>
+                <thead>
+                <td>Sessions</td>
+                <td>Questions</td>
+                <td>Solutions</td>
+                </thead>
+
+                <% sessions.forEach(function(n){ %>
+                    <tr>
+                        <td><a href='sessions/<%= n %>'><%= n %> </a></td>
+                        <td><a href='questions/<%= n %>'><%= n %></td>
+                        <td><a href='solutions/<%= n %>'><%= n %></td>
+                    </tr>
+                <% }); %>
+            </table>
+
+        </section>
+    </div>
+</div>
+<%- include('footer'); -%>
+</body>
 </html>

@@ -1,76 +1,15 @@
 <!doctype html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-    <title>CS Study</title>
-
-    <link rel="stylesheet" href="/reveal.js/css/reset.css">
-    <link rel="stylesheet" href="/reveal.js/css/reveal.css">
-    <link rel="stylesheet" href="/reveal.js/css/theme/white.css">
-    <link rel="stylesheet" href="/stylesheets/style.css">
-
-
-    <!-- Theme used for syntax highlighting of code -->
-    <link rel="stylesheet" href="/stylesheets/idea.css">
-
-    <!-- Printing and PDF exports -->
-    <script>
-      var link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.type = 'text/css';
-      link.href = window.location.search.match(/print-pdf/gi) ? '/reveal.js/css/print/pdf.css' : '/reveal.js/css/print/paper.css';
-      document.getElementsByTagName('head')[0].appendChild(link);
-    </script>
-</head>
+<%- include('header'); -%>
 <body>
 <div class="reveal">
     <div class="slides">
         <!-- Use external markdown resource, separate slides by three newlines; vertical slides by two newlines -->
-        <section data-markdown="/slides/session-<%= id %>.md" data-separator="^\n\n\n"
+        <section data-markdown="/slides/<%= id %>.md" data-separator="^\n\n\n"
                  data-separator-vertical="^\n\n"></section>
     </div>
 </div>
-
-<script src="/reveal.js/js/reveal.js"></script>
-
-<script>
-  // More info about config & dependencies:
-  // - https://github.com/hakimel/reveal.js#configuration
-  // - https://github.com/hakimel/reveal.js#dependencies
-  Reveal.initialize({
-    width: "100%",
-    height: "100%",
-    margin: 0.1,
-    minScale: 1,
-    maxScale: 1,
-    // Add the current slide number to the URL hash so that reloading the
-    // page/copying the URL will return you to the same slide
-    hash: true,
-
-    navigationMode: 'linear',
-    // // Parallax background image
-    // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg', // e.g. ""
-    //
-    // // Parallax background size
-    // parallaxBackgroundSize: '2100px 1080px', // CSS syntax, e.g. "" - currently only pixels are supported (don't use % or auto)
-
-    math: {
-      mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
-      config: 'TeX-AMS_HTML-full',  // See http://docs.mathjax.org/en/latest/config-files.html
-      // pass other options into `MathJax.Hub.Config()`
-      // TeX: {Macros: macros}
-    },
-
-    dependencies: [
-      {src: '/reveal.js/plugin/markdown/marked.js'},
-      {src: '/reveal.js/plugin/markdown/markdown.js'},
-      {src: '/reveal.js/plugin/notes/notes.js', async: true},
-      {src: '/reveal.js/plugin/highlight/highlight.js', async: true},
-      {src: '/reveal.js/plugin/math/math.js', async: true}
-    ]
-  });
-</script>
+<div id="home"><a href="/">Back to Home</a> </div>
+<%- include('footer'); -%>
 </body>
 </html>
