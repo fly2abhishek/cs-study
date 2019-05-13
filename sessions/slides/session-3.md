@@ -39,7 +39,7 @@ Arrays are the building blocks for lots of other, more complex data structures.
 ### Inserting
 If we want to insert something into an array, first we have to make space by "scooting over" everything starting at the index we're inserting into:
 
-![](https://www.interviewcake.com/images/svgs/arrays__insert_value.svg?bust=202)
+![](/images/arrays__insert_value.svg)
 
 
 An array of letters. From top to bottom, the values in the array are A, B, C, E, F, and G. The letter D is being inserted at the position of E, and the letters E, F, and G are each shown "scooting over" one index up to make room.
@@ -49,7 +49,7 @@ In the worst case we're inserting into the 0th index in the array (prepending), 
 ### Deleting
 Array elements are stored adjacent to each other. So when we remove an element, we have to fill in the gap—"scooting over" all the elements that were after it:
 
-![](https://www.interviewcake.com/images/svgs/arrays__delete_value.svg?bust=202)
+![](/images/arrays__delete_value.svg)
 
 
 Another array of letters. From top to bottom, the values in the array are A, B, C, Z, D, E, and F. The letter Z is being deleted, and the letters D, E, and F are each shown "scooting over" one index down to fill the space created by the deletion.
@@ -93,7 +93,7 @@ When you allocate a dynamic array, your dynamic array implementation makes an un
 We'd say this dynamic array's size is 4 and its capacity is 10. The dynamic array stores an end_index to keep track of where the dynamic array ends and the extra capacity begins.
 
 
-![](https://www.interviewcake.com/images/svgs/dynamic_arrays__capacity_size_end_index.svg?bust=202)
+![](/images/dynamic_arrays__capacity_size_end_index.svg)
 
 
 ### Doubling Appends
@@ -257,7 +257,7 @@ Think of a hash map as a "hack" on top of an array to let us use flexible keys i
 
 All we need is a function to convert a key into an array index (an integer). That function is called a hashing function.
 
-![](https://www.interviewcake.com/images/svgs/cs_for_hackers__hash_tables_lies_key_labeled.svg?bust=202)
+![](/images/cs_for_hackers__hash_tables_lies_key_labeled.svg)
 
 
 To look up the value for a given key, we just run the key through our hashing function to get the index to go to in our underlying array to grab the value.
@@ -266,7 +266,7 @@ How does that hashing function work? There are a few different approaches, and t
 
 Grab the number value for each character and add those up.
 
-![](https://www.interviewcake.com/images/svgs/cs_for_hackers__hash_tables_lies_chars.svg?bust=202)
+![](/images/cs_for_hackers__hash_tables_lies_chars.svg)
 
 
 The result is 429. But what if we only have 30 slots in our array? We'll use a common trick for forcing a number into a specific range: the modulus operator (%). Modding our sum by 30 ensures we get a whole number that's less than 30 (and at least 0):
@@ -279,7 +279,7 @@ $$429 \: \% \: 30 = 9$$
 ### Hash collisions
 What if two keys hash to the same index in our array? In our example above, look at "lies" and "foes":
 
-![](https://www.interviewcake.com/images/svgs/cs_for_hackers__hash_tables_lies_and_foes_addition.svg?bust=202)
+![](/images/cs_for_hackers__hash_tables_lies_and_foes_addition.svg)
 
 They both sum up to 429! So of course they'll have the same answer when we mod by 30:
 
@@ -290,7 +290,7 @@ This is called a hash collision. There are a few different strategies for dealin
 
 Here's a common one: instead of storing the actual values in our array, let's have each array slot hold a pointer to a linked list holding the values for all the keys that hash to that index:
 
-![](https://www.interviewcake.com/images/svgs/cs_for_hackers__hash_tables_hash_collision_key_val.svg?bust=202)
+![](/images/cs_for_hackers__hash_tables_hash_collision_key_val.svg)
 
 Notice that we included the keys as well as the values in each linked list node. Otherwise we wouldn't know which key was for which value!
 

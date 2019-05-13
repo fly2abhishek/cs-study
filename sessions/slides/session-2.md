@@ -77,7 +77,7 @@ int f(int n) {
 
 Suppose we call f(4). This calls f(3) twice. Each of those calls to f(3) calls f(2), until we get down to f(1)
 
-![](../img/recursive-runtime.png)
+![](/images/recursive-runtime.png)
 
 
 | Level | Nodes | Expression                 | Runtime |
