@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+<%- include('header'); -%>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <!-- Use external markdown resource, separate slides by three newlines; vertical slides by two newlines -->
+        <section data-markdown="/questions/<%= id %>.md" data-separator="^\n\n\n"
+                 data-separator-vertical="^\n\n"></section>
+    </div>
+</div>
+<div id="home"><a href="/">Back to Home</a> </div>
+<%- include('footer'); -%>
+</body>
+</html>
